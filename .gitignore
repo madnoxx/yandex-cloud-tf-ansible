@@ -1,0 +1,11 @@
+secrets.sh
+
+*.tfstate
+*.tfstate.backup
+
+.terraform/
+.terraform.lock.hcl
+
+hosts.ini
+
+.DS_Store
