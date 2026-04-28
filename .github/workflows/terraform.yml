@@ -5,6 +5,13 @@ on:
     branches: ["main"]
   pull_request:
     branches: ["main"]
+  workflow_dispatch:
+    inputs:
+      destroy:
+        description: 'Run Terraform Destroy'
+        required: true
+        type: boolean
+        default: false
 
 jobs:
   terraform:
@@ -55,3 +62,7 @@ jobs:
     - name: Terraform Apply
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
       run: terraform apply -auto-approve
+
+    - name: Terraform Destroy
+      if: github.event.inputs.destroy == 'true'
+      run: terraform destroy -auto-approve
