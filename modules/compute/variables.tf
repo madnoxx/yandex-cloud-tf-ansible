@@ -19,3 +19,8 @@ variable "memory_gb" {
   type        = number
   default     = 2
 }
+
+variable "ssh_pub_key" {
+  description = "Содержимое публичного SSH-ключа"
+  type        = string
+}

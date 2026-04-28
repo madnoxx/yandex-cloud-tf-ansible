@@ -41,6 +41,7 @@ module "web_server" {
   
   instance_name = "dracarys-web"
   subnet_id     = yandex_vpc_subnet.my_subnet.id
+  ssh_pub_key   = var.public_ssh_key
 }
 
 module "db_server" {
@@ -50,6 +51,7 @@ module "db_server" {
   subnet_id     = yandex_vpc_subnet.my_subnet.id
   cpu_cores     = 4
   memory_gb     = 4
+  ssh_pub_key   = var.public_ssh_key
 }
 
 output "web_ip" {
