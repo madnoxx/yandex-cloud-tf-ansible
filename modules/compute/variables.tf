@@ -24,3 +24,9 @@ variable "ssh_pub_key" {
   description = "Содержимое публичного SSH-ключа"
   type        = string
 }
+
+variable "user_data" {
+  description = "Скрипт для запуска при старте сервера"
+  type        = string
+  default     = ""
+}
