@@ -66,12 +66,12 @@ resource "yandex_lb_target_group" "web_tg" {
 
   target {
     subnet_id = yandex_vpc_subnet.my_subnet.id
-    address   = module.web_servers[0].external_ip
+    address   = module.web_servers[0].internal_ip
   }
 
   target {
     subnet_id = yandex_vpc_subnet.my_subnet.id
-    address   = module.web_servers[1].external_ip
+    address   = module.web_servers[1].internal_ip
   }
 }
 
