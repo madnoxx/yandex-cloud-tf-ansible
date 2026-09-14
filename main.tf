@@ -26,11 +26,11 @@ provider "yandex" {
 }
 
 resource "yandex_vpc_network" "my_network" {
-  name = "dracarys-network"
+  name = "my-network"
 }
 
 resource "yandex_vpc_subnet" "my_subnet" {
-  name           = "dracarys-subnet"
+  name           = "my-subnet"
   zone           = "ru-central1-a"
   network_id     = yandex_vpc_network.my_network.id
   v4_cidr_blocks = ["192.168.10.0/24"]
@@ -39,7 +39,7 @@ resource "yandex_vpc_subnet" "my_subnet" {
 module "web_servers" {
   source        = "./modules/compute"
   count         = 2
-  instance_name = "dracarys-web-${count.index}"
+  instance_name = "my-web-${count.index}"
   subnet_id     = yandex_vpc_subnet.my_subnet.id
   ssh_pub_key   = var.public_ssh_key
 
@@ -54,7 +54,7 @@ module "web_servers" {
 
 module "db_server" {
   source = "./modules/compute"  
-  instance_name = "dracarys-db"
+  instance_name = "my-db"
   subnet_id     = yandex_vpc_subnet.my_subnet.id
   cpu_cores     = 4
   memory_gb     = 4
@@ -99,7 +99,7 @@ resource "yandex_lb_network_load_balancer" "main_lb" {
 }
 
 output "load_balancer_ip" {
-  description = "ЗАЙДИ СЮДА В БРАУЗЕРЕ:"
+  description = "Ссылка:"
   value       = yandex_lb_network_load_balancer.main_lb.listener.*.external_address_spec[0].*.address
 }
 
